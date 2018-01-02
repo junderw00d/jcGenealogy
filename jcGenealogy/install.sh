@@ -1,7 +1,6 @@
 #!/bin/bash
 
 sudo mkdir /var/lib/jcGenealogy
-sudo chown root /var/lib/jcGenealogy
 sudo mkdir /etc/jcGenealogy
 
 read -p "Enter the MySQL username: " dbUser
