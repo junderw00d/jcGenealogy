@@ -1,1 +1,1 @@
-cc
+license:cc
