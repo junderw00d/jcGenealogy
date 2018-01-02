@@ -6,6 +6,7 @@ sudo mkdir /etc/jcGenealogy
 read -p "Enter the MySQL username: " dbUser
 read -p "Enter the MySQL password: " dbPassword
 mysql -u$dbUser -p$dbPassword -se "CREATE DATABASE jcGenealogy"
+mysql -u$dbUser -p$dbPassword -se "USE jcGenealogy"
 mysql -u$dbUser -p$dbPassword < dbstructure.sql
 sudo echo "<?php\$mysqli = new mysqli(\"127.0.0.1\", \"$dbUser\", \"$dbPassword\", \"jcForum\");?>" | sudo tee /etc/jcGenealogy/mysqlconf.php
 
