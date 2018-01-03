@@ -5,8 +5,16 @@ runningDirectory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
 sudo mkdir /var/lib/jcGenealogy
 sudo mkdir /etc/jcGenealogy
 
-read -p "Enter the MySQL username: " dbUser
-read -p "Enter the MySQL password: " dbPassword
+$mysqlTry = 0
+until mysql -u$dbUser -p$dbPassword -e ";" ; do
+  if [$mysqlTry -eq 1] then
+    echo "Incorrect password."
+  fi
+  read -p "Enter the MySQL username: " dbUser
+  read -p "Enter the MySQL password: " dbPassword
+  $mysqlTry = 1
+done
+
 mysql -u$dbUser -p$dbPassword -se "DROP DATABASE IF EXISTS jcGenealogy"
 mysql -u$dbUser -p$dbPassword -se "CREATE DATABASE jcGenealogy"
 echo "Setting up database structure (this may take a while)"
