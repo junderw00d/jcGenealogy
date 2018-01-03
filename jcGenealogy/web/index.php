@@ -12,6 +12,7 @@ function generateRandomString($length = 16) {
   return $randomString;
 }
 $code = generateRandomString();
+$mysqli->query("TRUNCATE TABLE accesscodes");
 $mysqli->query("INSERT INTO accesscodes (code, expires) VALUES ('" . $code . "', '" . date(u) + 600 . "')");
 echo "<a href='register.php'>Register</a> an account and enter the access code <code>" . $code . "</code>. You have 10 minutes.";
 ?>
