@@ -1,3 +1,3 @@
 # jcGenealogy
-Family tree software
-Work in progress
+<p>Family tree software</p>
+<p>Work in progress</p>
