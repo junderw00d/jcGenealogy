@@ -1,6 +1,8 @@
 <?php
 // If you are reading this in your browser, you do not have PHP, which is required for jcGenealogy.
-function generateRandomString($length = 10) {
+include "/etc/jcGenealogy/mysqlconf.php";
+
+function generateRandomString($length = 16) {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $charactersLength = strlen($characters);
   $randomString = '';
@@ -9,5 +11,6 @@ function generateRandomString($length = 10) {
   }
   return $randomString;
 }
-echo generateRandomString();
-?>
+$code = generateRandomString();
+$mysqli->query("INSERT INTO accesscodes (code, expires) VALUES ('" . $code . "', '" . date(u) + 600 . "')");
+echo "<a href='register.php'>Register</a> an account and enter the access code <code>" . $code . "</code>. You have 10 minutes.";
