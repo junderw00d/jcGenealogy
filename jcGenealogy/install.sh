@@ -20,4 +20,4 @@ sudo echo -e "Alias /$directory /var/lib/jcGenealogy\n<Directory /var/lib/jcGene
 sudo service apache2 restart
 
 # sudo rm /var/lib/jcGenealogy/* -r
-sudo cp -r "$runningDirectory/web/*" /var/lib/jcGenealogy
+sudo cp -r "$runningDirectory/web/" /var/lib/jcGenealogy
