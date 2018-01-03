@@ -59,7 +59,7 @@ CREATE TABLE `humans` (
   `alive` tinyint(1) DEFAULT NULL,
   `biography` varchar(10000) DEFAULT NULL,
   `birthdate` date,
-  `deathdate` date
+  `deathdate` date,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
