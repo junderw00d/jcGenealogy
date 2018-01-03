@@ -38,8 +38,8 @@ DROP TABLE IF EXISTS `access_codes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `access_codes` (
   `code` varchar(16) DEFAULT NULL,
-  `expires` int(10) DEFAULT NULL
-  `original` boolean DEFAULT NULL
+  `expires` int(10) DEFAULT NULL,
+  `original` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
