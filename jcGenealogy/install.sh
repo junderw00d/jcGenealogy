@@ -1,5 +1,7 @@
 #!/bin/bash
 
+directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
+
 sudo mkdir /var/lib/jcGenealogy
 sudo mkdir /etc/jcGenealogy
 
@@ -8,7 +10,7 @@ read -p "Enter the MySQL password: " dbPassword
 mysql -u$dbUser -p$dbPassword -se "DROP DATABASE IF EXISTS jcGenealogy"
 mysql -u$dbUser -p$dbPassword -se "CREATE DATABASE jcGenealogy"
 echo "Setting up database structure (this may take a while)"
-mysql jcGenealogy -u$dbUser -p$dbPassword < dbstructure.sql
+mysql jcGenealogy -u$dbUser -p$dbPassword < "$directory/dbstructure.sql"
 
 sudo echo -e "<?php\ninclude \"/etc/jcGenealogy/mysqlconf.php\";\n?>" | sudo dd status=none of=/etc/jcGenealogy/load.php
 sudo echo -e "<?php\n\$mysqli = new mysqli(\"127.0.0.1\", \"$dbUser\", \"$dbPassword\", \"jcGenealogy\");\n?>" | sudo dd status=none of=/etc/jcGenealogy/mysqlconf.php
