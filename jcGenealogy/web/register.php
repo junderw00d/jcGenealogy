@@ -16,20 +16,23 @@ if ($_POST['register'] === null) {
         if ($accessCheck->num_rows === 0) {
                 echo "No such access code, or the access code is expired.";
         } else {
-                echo "<form id='selectHumanForm' method='POST' action='register.php'>";
-                echo "<select name='humanLink' id='select' form='selectHumanForm'>";
-                $humanGen = $mysqli->query("SELECT * FROM humans ORDER BY lastname");
-                while ($humanGenResult = $humanGen->fetch_assoc()) {
-                        echo "<option"; 
-                        if ($humanGenResult['alive'] == 0) {
-                                echo " disabled";
-                        }
+                if ($accessCheck->fetch_object()->original === 1) {
+                        echo "Welcome to jcGenealogy.";
+                } else {
+                	echo "<form id='selectHumanForm' method='POST' action='register.php'>";
+                	echo "<select name='humanLink' id='select' form='selectHumanForm'>";
+                	$humanGen = $mysqli->query("SELECT * FROM humans ORDER BY lastname");
+                	while ($humanGenResult = $humanGen->fetch_assoc()) {
+                	        echo "<option"; 
+                	        if ($humanGenResult['alive'] == 0) {
+                	        	echo " disabled";
+                	        }
                         echo" value='" . $humanGenResult['id'] . "'>" . $humanGenResult['firstname'] . " " . $humanGenResult['lastname'] . "</option>";
-
-                }
-                echo "</select><br>";
-                echo "<input type='submit'></form>";
-                echo "<button onclick='idwt'>I do not want to link my account to a member of the family tree.</button>";
+                	}
+               		echo "</select><br>";
+                	echo "<input type='submit'></form>";
+                	echo "<button onclick='idwt'>I do not want to link my account to a member of the family tree.</button>";
+		}
         }
 }
 ?>
