@@ -1,6 +1,6 @@
 <?php
 // If you are reading this in your browser, you do not have PHP, which is required for jcGenealogy.
-include "/etc/jcGenealogy/mysqlconf.php";
+include "/etc/jcGenealogy/load.php";
 function generateRandomString($length = 16) {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $charactersLength = strlen($characters);
