@@ -16,7 +16,7 @@ if ($_POST['register'] === null) {
         if ($accessCheck->num_rows === 0) {
                 echo "No such access code, or the access code is expired.";
         } else {
-                if ($accessCheck->fetch_object()->original === 1) {
+                if ($accessCheck->fetch_object()->original == 1) {
                         echo "Welcome to jcGenealogy.";
                 } else {
                 	echo "<form id='selectHumanForm' method='POST' action='register.php'>";
