@@ -11,7 +11,7 @@ if ($_POST['register'] === null) {
         </form>
         ";
 } else {
-        include "/etc/jcGenealogy/mysqlconf.php";
+        include "/etc/jcGenealogy/load.php";
         $accessCheck = $mysqli->query("SELECT * FROM access_codes WHERE code='" . $_POST['accesscode'] . "' AND expires > '" . date(U) . "'");
         if ($accessCheck->num_rows === 0) {
                 echo "No such access code, or the access code is expired.";
