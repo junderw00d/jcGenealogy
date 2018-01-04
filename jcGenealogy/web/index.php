@@ -14,5 +14,9 @@ $code = generateRandomString();
 $expires = date(U) + 600;
 $mysqli->query("TRUNCATE TABLE access_codes");
 $mysqli->query("INSERT INTO access_codes (code, expires, original) VALUES ('" . $code . "', '" . $expires . "', '1')");
-echo "<a href='register.php'>Register</a> an account and enter the access code <code>" . $code . "</code>. You have 10 minutes.";
+echo"
+<form action='register.php' method='post'>
+<input name='original-code' type='hidden' value='" . $code . "'>
+<input type='submit' value='Finish registration'>
+";
 ?>
