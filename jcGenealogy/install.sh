@@ -17,7 +17,7 @@ done
 
 mysql -u$dbUser -p$dbPassword -se "DROP DATABASE IF EXISTS jcGenealogy"
 mysql -u$dbUser -p$dbPassword -se "CREATE DATABASE jcGenealogy"
-echo "Setting up database structure (this may take a while)"
+echo -e "\nSetting up database structure (this may take a while)"
 mysql jcGenealogy -u$dbUser -p$dbPassword < "$runningDirectory/dbstructure.sql"
 
 sudo echo -e "<?php\ninclude \"/etc/jcGenealogy/mysqlconf.php\";\n?>" | sudo dd status=none of=/etc/jcGenealogy/load.php
