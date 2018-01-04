@@ -7,7 +7,7 @@ sudo mkdir /etc/jcGenealogy
 
 function getCredentials {
   read -r -p "Enter the MySQL username: " dbUser
-  read -r -p -s "Enter the MySQL password: " dbPassword
+  read -s -r -p "Enter the MySQL password: " dbPassword
 }
 getCredentials
 until mysql -u$dbUser -p$dbPassword > /dev/null 2>&1 -e ";" ; do
