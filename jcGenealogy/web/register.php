@@ -4,8 +4,12 @@ if ($_POST['register'] != true) {
         <form action='register.php' method='POST'>
                 <p><b>Email: </b><input type='email' name='email' required></p>
                 <p><b>Password: </b><input type='password' name='password' required></p>
-                <p><b>Confirm Password: </b><input type='password' name='confirmpassword' required></p>
-                <p><b>Access Code: </b><input name='accesscode' required></p>
+                <p><b>Confirm Password: </b><input type='password' name='confirmpassword' required></p>";
+		if ($_POST['accesscode'] === null) {
+                	echo "<p><b>Access Code: </b><input name='accesscode' required></p>";
+		} else {
+			echo "<input type='hidden' name='accesscode'>";
+		}
                 <input type='hidden' name='register' value='true'>
                 <input type='submit'>
         </form>
