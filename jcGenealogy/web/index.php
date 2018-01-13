@@ -16,7 +16,7 @@ $mysqli->query("TRUNCATE TABLE access_codes");
 $mysqli->query("INSERT INTO access_codes (code, expires, original) VALUES ('" . $code . "', '" . $expires . "', '1')");
 echo"
 <form action='register.php' method='post'>
-<input name='register' type='hidden' value='true'>
+<input name='begin' type='hidden' value='true'>
 <input name='accesscode' type='hidden' value='" . $code . "'>
 <input type='submit' value='Begin using jcGenealogy'>
 ";
