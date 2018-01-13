@@ -1,5 +1,5 @@
 <?php
-if ($_POST['register'] === null) {
+if ($_POST['register'] != true) {
         echo "
         <form action='register.php' method='POST'>
                 <p><b>Email: </b><input type='email' name='email' required></p>
