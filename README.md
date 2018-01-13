@@ -1,3 +1,4 @@
 # jcGenealogy
-<p>Family tree software</p>
-<p>Work in progress</p>
+To install:
+<code>sudo git clone https://github.com/KoalaMuffin/jcGenealogy.git</code>
+<code>. jcGenealogy/jcGenealogy/install.sh</code>
