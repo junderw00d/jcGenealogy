@@ -24,11 +24,14 @@ if ($_POST['register'] != true) {
 		
 
 		if ($accessCheck->fetch_object()->original == 1) {
-                        echo "Welcome to jcGenealogy.";
-					$mysqli->query("TRUNCATE TABLE users");
-					$salt = hash("sha512", uniqid(mt_rand(), true));
-					$mysqli->query("INSERT INTO users (email, password, salt) VALUES ('" . $_POST['email'] . "', '" . hash("sha512", $_POST['password']) . "', '" . $salt . "')");
-                } else {
+                        session_start();
+			$_SESSION['email'] = $_POST['email'];
+			echo "Welcome to jcGenealogy.";
+			$mysqli->query("TRUNCATE TABLE users");
+			$salt = hash("sha512", uniqid(mt_rand(), true));
+			$mysqli->query("INSERT INTO users (email, password, salt) VALUES ('" . $_POST['email'] . "', '" . hash("sha512", $_POST['password']) . "', '" . $salt . "')");
+                	echo"Now, you can <a href='newhuman.php'>add your first human</a>!";
+		} else {
                 	echo "<form id='selectHumanForm' method='POST' action='register.php'>";
                 	echo "<select name='humanLink' id='select' form='selectHumanForm'>";
                 	$humanGen = $mysqli->query("SELECT * FROM humans ORDER BY lastname");
