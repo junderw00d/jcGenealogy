@@ -8,9 +8,10 @@ if ($_POST['register'] != true) {
 		if ($_POST['accesscode'] === null) {
                 	echo "<p><b>Access Code: </b><input name='accesscode' required></p>";
 		} else {
-			echo "<input type='hidden' name='accesscode'>";
+			echo "<input type='hidden' name='accesscode' value='" . $_POST['accesscode'] . "'>";
 		}
-                <input type='hidden' name='register' value='true'>
+                echo"
+		<input type='hidden' name='register' value='true'>
                 <input type='submit'>
         </form>
         ";
