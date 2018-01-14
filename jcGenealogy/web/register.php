@@ -29,7 +29,7 @@ if ($_POST['register'] != true) {
 			echo "Welcome to jcGenealogy.";
 			$mysqli->query("TRUNCATE TABLE users");
 			$salt = hash("sha512", uniqid(mt_rand(), true));
-			$mysqli->query("INSERT INTO users (email, password, salt) VALUES ('" . $_POST['email'] . "', '" . hash("sha512", $_POST['password']) . "', '" . $salt . "')");
+			$mysqli->query("INSERT INTO users (email, password, salt) VALUES ('" . $_POST['email'] . "', '" . hash("sha512", $_POST['password'] . $salt) . "', '" . $salt . "')");
                 	echo"Now, you can <a href='newhuman.php'>add your first human</a>!";
 		} else {
                 	echo "<form id='selectHumanForm' method='POST' action='register.php'>";
