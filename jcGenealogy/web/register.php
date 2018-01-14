@@ -31,7 +31,7 @@ if ($_POST['register'] != true) {
                 	       
 			session_start();
 			$_SESSION['email'] = $_POST['email'];
-			$_SESSION['password'] = hash("sha512", $_POST['password'] . $salt);
+			$_SESSION['password'] = hash("sha512", $_POST['password']);
 			
 			echo"Now, you can <a href='newhuman.php'>add your first human</a>!";
 		} else {
