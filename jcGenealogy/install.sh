@@ -20,8 +20,10 @@ mysql -u$dbUser -p$dbPassword -se "CREATE DATABASE jcGenealogy"
 echo -e "\nSetting up database structure (this may take a while)"
 mysql jcGenealogy -u$dbUser -p$dbPassword < "$runningDirectory/dbstructure.sql"
 
-sudo echo -e "<?php\ninclude \"/etc/jcGenealogy/mysqlconf.php\";\n?>" | sudo dd status=none of=/etc/jcGenealogy/load.php
+sudo echo -e "<?php\ninclude \"/etc/jcGenealogy/mysqlconf.php\";\ninclude \"/etc/jcGenealogy/checkuser.php\";\n?>" | sudo dd status=none of=/etc/jcGenealogy/load.php
 sudo echo -e "<?php\n\$mysqli = new mysqli(\"127.0.0.1\", \"$dbUser\", \"$dbPassword\", \"jcGenealogy\");\n?>" | sudo dd status=none of=/etc/jcGenealogy/mysqlconf.php
+sudo echo -e "<?php \nsession_start(); \nfunction() checkCreds { \n$userCheck = $mysqli->query("SELECT password, salt WHERE email='" . $_SESSION['email'] . "'")->fetch_assoc(); \nif (hash("sha512", $_SESSION['password'] . $salt) == $userCheck['password'] ) { \nreturn true; \n} \n} \n?>" sudo dd status=none of=/etc/jcGenealogy/checkuser.php
+
 sudo echo -e "dbUser=\"$dbUser\"\ndbPassword=\"$dbPassword\"" | sudo dd status=none of=/etc/jcGenealogy/mysqlconf.sh
 
 read -r -p $"Enter what directory you would like the software to be located at (i.e., if you want it at localhost/familytree, enter 'familytree'): " directory
