@@ -30,7 +30,10 @@ if ($loggedin === true) {
 			$alive = 0;	
 		}
                 $mysqli->query("INSERT INTO humans (firstname, lastname, alive, deathdate) VALUES ('" . $nameArray[0] . "', '" . $nameArray[sizeof($nameArray) - 1]. "', '" . $alive . "', '" . $_POST['deaddate'] . "')");
-        }
+        	if ($_POST['me'] == "on") {
+			$mysqli->query("UPDATE users SET humanid='" . $mysqli->insert_id . "' WHERE id='" . $_SESSION['id'] . "'")	
+		}
+	}
 } else {
         echo "Not logged in!!!";
 }
