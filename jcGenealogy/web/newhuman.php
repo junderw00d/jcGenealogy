@@ -4,6 +4,7 @@ if ($loggedin === true) {
         if ($_POST['form'] !== "newhuman") {
                 echo"Hello, " . $_SESSION['email'] . "!";
                 echo "
+                        <script src='newhuman.js'>
                         <b>Add a human!</b>
                         <form method='POST' action='newhuman.php'>
                                 <p><b>Full name: </b><input name='name'></p>
@@ -16,24 +17,10 @@ if ($loggedin === true) {
                                         <label for='me'>This is ME!</label>
                                 </p>
                                 <input type='hidden' name='form' value='newhuman'>
+                                <input type='hidden' name='deathhidden' id='deathhidden'>
                                 <input type='submit'>
                         </form>
-                        <script>
-                                originalAlive = false;
-
-                                alive = document.getElementById('alive')
-                                me = document.getElementById('me');
-                                alive.onclick = function() {
-                                        originalAlive = alive.checked;
-                                }
-                                me.onclick = function() {
-                                        if (me.checked === true) {
-                                                alive.checked = true;
-                                        } else {
-                                                alive.checked = originalAlive;
-                                        }
-                                }
-                        </script>
+                        
                         ";
         } else {
                 $nameArray = explode(" ", $_POST['name']);
