@@ -13,6 +13,9 @@ var me = document.getElementById('me');
 
 alive.onchange = function() {
 	originalAlive = alive.checked;
+	if (alive.checked === false) {
+		me.checked = false;	
+	}
 	deathHide();
 };
 
