@@ -21,7 +21,7 @@ if ($loggedin === true) {
         		";
 	} else {
 		$nameArray = explode(" ", $_POST['name']);
-		echo "It looks like you want to add a human with... name1=" . $nameArray[0] . "and two=" . $nameArray[1];
+		echo "It looks like you want to add a human with... name1=" . $nameArray[0] . "and two=" . $nameArray[sizeof($nameArray) - 1];
 		
 	}
 } else {
