@@ -24,8 +24,7 @@ if ($loggedin === true) {
                         ";
         } else {
                 $nameArray = explode(" ", $_POST['name']);
-                echo "It looks like you want to add a human with... name1=" . $nameArray[0] . "and two=" . $nameArray[sizeof($nameArray) - 1];
-                
+                $mysqli->query("INSERT INTO humans (firstname, lastname, alive, deathdate) VALUES ('" . $nameArray[0] . "', '" . $nameArray[sizeof($nameArray) - 1]. "', '" . $_POST['alive'] . "', '" . $_POST['dead'] . "')");
         }
 } else {
         echo "Not logged in!!!";
