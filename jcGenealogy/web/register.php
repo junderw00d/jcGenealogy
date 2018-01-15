@@ -28,10 +28,11 @@ if ($_POST['register'] != true) {
                         $mysqli->query("TRUNCATE TABLE users");
                         $salt = hash("sha512", uniqid(mt_rand(), true));
                         $mysqli->query("INSERT INTO users (email, password, salt) VALUES ('" . $_POST['email'] . "', '" . hash("sha512", hash("sha512",$_POST['password']) . $salt) . "', '" . $salt . "')");
-                               
+                              
                         session_start();
                         $_SESSION['email'] = $_POST['email'];
                         $_SESSION['password'] = hash("sha512", $_POST['password']);
+                        $_SESSION['id'] = $mysqli->insert_id;
                         
                         echo"Now, you can <a href='newhuman.php'>add your first human</a>!";
                 } else {
