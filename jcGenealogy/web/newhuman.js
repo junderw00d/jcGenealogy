@@ -1,8 +1,8 @@
 function deathHide() {
 	if (alive.checked === true) {
-		document.getElementById("dead").style.display = "none";
+		document.getElementById("dead").disabled = true;
 	} else {
-		document.getElementById("dead").style.display = "block";
+		document.getElementById("dead").disabled = false;
 	}
 }
 
