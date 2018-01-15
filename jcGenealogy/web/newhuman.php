@@ -6,10 +6,10 @@ if ($loggedin === true) {
                 <b>Add a human!</b>
                 <form method='POST' action='newhuman.php'>
                         <p><b>Full name: </b><input name='name'></p>
-                        <input type='checkbox' id='alive' name='alive'>
-                        <label for='alive'>Alive</label>
-                        <input type='checkbox' id='me' name='me'>
-                        <label for='me'>This is ME!</label>
+                        <p><input type='checkbox' id='alive' name='alive'>
+                        <label for='alive'>Alive</label></p>
+                        <p><input type='checkbox' id='me' name='me'>
+                        <label for='me'>This is ME!</label></p>
                 </form>
         ";
 } else {
