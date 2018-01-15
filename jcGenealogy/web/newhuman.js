@@ -6,10 +6,10 @@ function deathHide() {
 	}
 }
 
-originalAlive = false;
+var originalAlive = false;
 
-alive = document.getElementById('alive')
-me = document.getElementById('me');
+var alive = document.getElementById('alive');
+var me = document.getElementById('me');
 
 alive.onchange = function() {
 	originalAlive = alive.checked;
@@ -23,9 +23,8 @@ me.onchange = function() {
 		alive.checked = originalAlive;
 	}
 	deathHide();
-}
+};
 
 document.getElementById("dead").onchange = function() {
 	document.getElementById("deadhidden").value = document.getElementById('dead').valueAsDate.toISOString().split("T")[0];
- }
-}
+};
