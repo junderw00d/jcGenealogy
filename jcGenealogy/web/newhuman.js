@@ -29,5 +29,5 @@ me.onchange = function() {
 };
 
 document.getElementById("dead").onchange = function() {
-	document.getElementById("deadhidden").value = document.getElementById('dead').valueAsDate.toISOString().split("T")[0];
+	//document.getElementById("deadhidden").value = document.getElementById('dead').valueAsDate.toISOString().split("T")[0];
 };
