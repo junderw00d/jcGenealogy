@@ -72,10 +72,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
   `humanid` int(6) DEFAULT NULL,
   `email` varchar(35) DEFAULT NULL,
   `password` varchar(1024) DEFAULT NULL,
-  `salt` varchar(1024) DEFAULT NULL
+  `salt` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
