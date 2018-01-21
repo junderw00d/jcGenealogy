@@ -57,6 +57,7 @@ CREATE TABLE `humans` (
   `motherid` int(6) DEFAULT NULL,
   `fatherid` int(6) DEFAULT NULL,
   `alive` tinyint(1) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
   `biography` varchar(10000) DEFAULT NULL,
   `birthdate` date,
   `deathdate` date,
