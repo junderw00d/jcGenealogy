@@ -20,7 +20,7 @@ if ($loggedin === true) {
                                 
                                 <input type='submit'>
                         </form>
-			<script src='scripts/newhuman.js'></script>
+			<script src='assets/scripts/newhuman.js'></script>
                         ";
         } else {
                 $nameArray = explode(" ", $_POST['name']);
