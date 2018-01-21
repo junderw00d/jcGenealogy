@@ -10,7 +10,16 @@ if ($_POST['login'] === null) {
 		</form>
  	";
 } else {
-echo "log in!!!";
+	
+	session_start();
+        
+	$_SESSION['email'] = $_POST['email'];
+	$_SESSION['password'] = hash("sha512", $_POST['password']);
+	
+	include "/etc/jcGenealogy/load.php";
+	
+	echo $loggedin;
+	
 }
 
 ?>
