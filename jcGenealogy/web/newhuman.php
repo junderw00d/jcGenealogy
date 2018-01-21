@@ -18,8 +18,8 @@ if ($loggedin === true) {
                                 </p>
                                 <p><b>Date of death: </b><input type='date' name='deaddate' id='dead'></p>
                                 <p><b>Date of birth: </b><input type='date' name='birthdate' id='birth'></p>
-				<p><input type='radio' name='gender' value='Male'> Male</p>
-				<p><input type='radio' name='gender' value='Female'> Female</p>
+				<p><input type='radio' name='gender' value='1'> Male</p>
+				<p><input type='radio' name='gender' value='0'> Female</p>
 				
 				<input type='hidden' name='form' value='newhuman'>
                                 <input type='submit'>
@@ -33,7 +33,7 @@ if ($loggedin === true) {
 		} else {
 			$alive = 0;	
 		}
-                $mysqli->query("INSERT INTO humans (firstname, lastname, alive, deathdate) VALUES ('" . $nameArray[0] . "', '" . $nameArray[sizeof($nameArray) - 1]. "', '" . $alive . "', '" . $_POST['deaddate'] . "')");
+                $mysqli->query("INSERT INTO humans (firstname, lastname, alive, birthdate, deathdate, gender) VALUES ('" . $nameArray[0] . "', '" . $nameArray[sizeof($nameArray) - 1]. "', '" . $alive . "', '" . $_POST['birthdate'] . "', '" . $_POST['deaddate'] . "', '" . $_POST['gender'] . "')");
         	if ($_POST['me'] == "on") {
 			$mysqli->query("UPDATE users SET humanid='" . $mysqli->insert_id . "' WHERE id='" . $_SESSION['id'] . "'");
 		}
