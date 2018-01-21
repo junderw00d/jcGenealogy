@@ -18,8 +18,8 @@ if ($loggedin === true) {
                                 </p>
                                 <p><b>Date of death: </b><input type='date' name='deaddate' id='dead'></p>
                                 <p><b>Date of birth: </b><input type='date' name='birthdate' id='birth'></p>
-				<input type='radio' name='gender' value='Male">
-				<input type='radio' name='gender' value='Female">
+				<p><input type='radio' name='gender' value='Male'> Male</p>
+				<p><input type='radio' name='gender' value='Female'> Female</p>
 				
 				<input type='hidden' name='form' value='newhuman'>
                                 <input type='submit'>
