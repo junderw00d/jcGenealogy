@@ -1,5 +1,6 @@
 <?php
 include"/etc/jcGenealogy/load.php";
+include"/etc/jcGenealogy/checkuser.php";
 if ($loggedin === true) {
         if ($_POST['form'] !== "newhuman") {
                 echo"Hello, " . $_SESSION['email'] . "!";
