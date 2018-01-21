@@ -14,6 +14,14 @@ if ($_POST['login'] === null) {
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['password'] = hash("sha512", $_POST['password']);
         include "/etc/jcGenealogy/load.php";
+        
+	$userCheck = $mysqli->query("SELECT password, salt FROM users WHERE email='" . $_SESSION['email'] . "'")->fetch_assoc();
+	if (hash("sha512", $_SESSION['password'] . $userCheck['salt']) == $userCheck['password'] ) {
+	        $loggedin = true;
+	} else {
+	        $loggedin = false;
+	}
+        
         if ($loggedin == true) {
                 $_SESSION['id'] = $mysqli->query("SELECT id FROM users WHERE email ='" . $_POST['email'] . "'")->fetch_assoc()['id'];
                 echo "You're logged in now.";
