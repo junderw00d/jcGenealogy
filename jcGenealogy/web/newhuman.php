@@ -17,8 +17,11 @@ if ($loggedin === true) {
                                         <label for='me'>This is ME!</label>
                                 </p>
                                 <p><b>Date of death: </b><input type='date' name='deaddate' id='dead'></p>
-                                <input type='hidden' name='form' value='newhuman'>
-                                
+                                <p><b>Date of birth: </b><input type='date' name='birthdate' id='birth'></p>
+				<input type='radio' name='gender' value='Male">
+				<input type='radio' name='gender' value='Female">
+				
+				<input type='hidden' name='form' value='newhuman'>
                                 <input type='submit'>
                         </form>
 			<script src='assets/scripts/newhuman.js'></script>
