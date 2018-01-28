@@ -6,7 +6,7 @@
 <div id='sidebar'>
         <div id='sidebarHeader'>
                 <img id='logo' src='http://192.168.1.189/mediawiki/images/0/07/Progress_Wiki_Logo.png'>
-                <h3 style='text-align:center'>Underwood Family Tree</h3>
+                <h3 style='text-align:center'>Family Tree</h3>
         </div>
         <ul>
                 <li><a href='register.php'>Create account</a></li>
