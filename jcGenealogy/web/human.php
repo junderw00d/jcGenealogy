@@ -3,11 +3,21 @@
         <link rel='stylesheet' href='assets/style.css'>
 </head>
 
+<div id='sidebar'>
+        <div id='sidebarHeader'>
+                <img id='logo' src='http://192.168.1.189/mediawiki/images/0/07/Progress_Wiki_Logo.png'>
+                <h3 style='text-align:center'>Underwood Family Tree</h3>
+        </div>
+        <ul>
+                <li><a href='register.php'>Create account</a></li>
+                <li><a href='tree.php'>View tree</a></li>
+        </ul>
+</div>
+
 <?php
 include "/etc/jcGenealogy/load.php";
 $humanQuery = $mysqli->query("SELECT * FROM humans WHERE ID='" . $_GET['id'] . "'")->fetch_assoc();
 $fullname = $humanQuery['firstname'] . " " . $humanQuery['lastname'];
-
 if ($humanQuery['gender'] == 1) {
         $gender = "Male";
 } else {
@@ -25,7 +35,7 @@ $birthdateExplode = explode("-", $humanQuery['birthdate']);
 $birthday = $months[intval(ltrim($birthdateExplode[1]), 0) - 1] . " " . ltrim($birthdateExplode[2],0) . ", " . $birthdateExplode[0];
 
 echo "
-<div id='page-content'>
+<span><div id='page-content'>
 <div id='human-header'>
 <h1>$fullname</h1>
 <div id='edit'><img src='assets/edit.svg' width='15px'> <a href='humanedit.php'>Edit</a></div>
