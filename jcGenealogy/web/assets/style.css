@@ -1,1 +1,47 @@
-
+body {
+        background:#F8F9F9;
+        padding-top:1%;
+        padding-left:10%;
+        padding-right:10%;
+}
+h1 {
+        vertical-align: middle;
+        display:inline;
+}
+#table {
+        position:sticky;
+        border-radius: 8px;
+        border:solid;
+        float:right;
+        padding:5px;
+        margin-left:10px;
+}
+th {
+        text-align:left;
+}
+#fullname {
+        font-size:125%;
+        text-align:center;
+}
+hr {
+        border-color: black;
+}
+#biography {
+        display:inline;
+}
+#summary {
+        outline:none;
+}
+#summary:hover {
+        cursor:pointer;
+}
+#page-content {
+        padding:20px;
+        background:white;
+        border-radius:10px;
+}
+#edit {
+        display:inline;
+        float:right;
+        vertical-align: middle;
+}
