@@ -1,13 +1,23 @@
+#sidebar {
+border-radius:10px;
+        width:10%;
+        display:inline-block;
+        padding:1%;
+        float:left;
+        background:white;
+}
 body {
+        padding-left:1%;
+        padding-right:1%;
         background:#F8F9F9;
         padding-top:1%;
-        padding-left:10%;
-        padding-right:10%;
+
 }
 h1 {
         vertical-align: middle;
         display:inline;
 }
+
 #table {
         position:sticky;
         border-radius: 8px;
@@ -36,12 +46,22 @@ hr {
         cursor:pointer;
 }
 #page-content {
+float:right;
+        width:80%;
         padding:20px;
         background:white;
         border-radius:10px;
+        display:inline-block;
 }
 #edit {
         display:inline;
         float:right;
         vertical-align: middle;
+}
+#logo {
+        border-radius:20px;
+        width:100px;
+}
+#sidebarHeader {
+        text-align:center;
 }
