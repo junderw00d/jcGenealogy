@@ -6,7 +6,7 @@
 <div id='sidebar'>
         <div id='sidebarHeader'>
                 <img id='logo' src='http://192.168.1.189/mediawiki/images/0/07/Progress_Wiki_Logo.png'>
-                <h3 style='text-align:center'>Family Tree</h3>
+                <h3 style='text-align:center'>Underwood Family Tree</h3>
         </div>
         <ul>
                 <li><a href='register.php'>Create account</a></li>
@@ -34,6 +34,16 @@ $birthdateExplode = explode("-", $humanQuery['birthdate']);
 
 $birthday = $months[intval(ltrim($birthdateExplode[1]), 0) - 1] . " " . ltrim($birthdateExplode[2],0) . ", " . $birthdateExplode[0];
 
+if ($humanQuery['gender'] == 1) {
+        $children = $mysqli->query("SELECT * FROM humans WHERE fatherid='" . $humanQuery['id'] . "'");
+} else {
+        $children = $mysqli->query("SELECT * FROM humans WHERE motheridid='" . $humanQuery['id'] . "'");
+}
+$childList = "";
+while ($result = $children->fetch_assoc()) {
+        $childList = $childList . "<li><a href='human.php?id=" . $result['id'] . "'>" . $result['firstname'] . "</a></li>";
+}
+
 echo "
 <span><div id='page-content'>
 <div id='human-header'>
@@ -56,6 +66,10 @@ echo "
                                 <tr>
                                         <th scope='row'>Date of birth</th>
                                         <td>" . $birthday . " (age $age)</td>
+                                </tr>
+                                <tr>
+                                        <th scope='row'>Children</th>
+                                        <td><ul>$childList</ul></td>
                                 </tr>
                         </tbody>
                 </table>
