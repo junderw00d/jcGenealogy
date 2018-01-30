@@ -16,6 +16,14 @@
 
 <?php
 include "/etc/jcGenealogy/load.php";
+
+
+if ($_POST['edit'] == true) {
+        $mysqli->query("UPDATE humans SET biography = '" . nl2br($_POST['biography'],false) . "' WHERE ID='" . $_POST['id'] . "'");;
+        header("Location: human.php?id=" . $_POST['id']);
+}
+
+
 $humanQuery = $mysqli->query("SELECT * FROM humans WHERE ID='" . $_GET['id'] . "'")->fetch_assoc();
 $fullname = $humanQuery['firstname'] . " " . $humanQuery['lastname'];
 if ($humanQuery['gender'] == 1) {
@@ -48,7 +56,24 @@ echo "
 <span><div id='page-content'>
 <div id='human-header'>
 <h1>$fullname</h1>
-<div id='edit'><img src='assets/edit.svg' width='15px'> <a href='humanedit.php'>Edit</a></div>
+";
+
+if ($_GET['action'] == "edit") {
+        echo "
+
+<div id='edit-view'>
+        <img src='assets/view.svg' width='15px'> <a href='human.php?id=" . $humanQuery['id'] . "'>View</a>
+</div>";
+
+} else {
+
+echo "
+<div id='edit-view'>
+        <img src='assets/edit.svg' width='15px'> <a href='human.php?id=" . $humanQuery['id'] . "&action=edit'>Edit</a>
+</div>";
+}
+
+echo "
 <br>
 <hr>
 </div>
@@ -60,12 +85,29 @@ echo "
                         <tbody>
                                 <tr id='top'><td id='fullname' colspan='2'><span>" . $fullname . "</span></td></tr>
                                 <tr>
-                                        <th scope='row'>Gender</th>
-                                        <td>" . $gender .  "</td>
+                                        <th scope='row'>Gender</th>";
+
+                                        if ($_GET['action'] == "edit") {
+                                                echo"
+                                                <td>
+                                                        <input form='edit-form' type='radio' name='gender' value='1'>Male</input>
+                                                        <input form='edit-form' type='radio' name='gender' value='0'>Female</input>
+                                                </td>";
+                                        } else {
+                                                echo"<td>" . $gender .  "</td>";
+                                        }
+                                echo "
+
                                 </tr>
                                 <tr>
-                                        <th scope='row'>Date of birth</th>
-                                        <td>" . $birthday . " (age $age)</td>
+                                        <th scope='row'>Date of birth</th>";
+
+                                if ($_GET["action"] == "edit") {
+                                        echo"<td><input form='edit-form' type='date' value='" . $humanQuery['birthdate'] . "'></td>";
+                                } else {
+                                        echo "<td>" . $birthday . " (age $age)</td>";
+                                }
+                                echo"
                                 </tr>
                                 <tr>
                                         <th scope='row'>Children</th>
@@ -75,19 +117,28 @@ echo "
                 </table>
         </details>
 </div>
+<div id='biography-div'>
+        <p id='biography'";
 
-<div id='biography'>
-        <p>
-aoisdjgoijsdfoigj soidjfg iosdjfg iosjdfgi osjdfgipo jsdifpgo jsdofipg jsidofpg 
-sidufg idfhgu isdhfgui sdhfgui hdsfuigh dsfuigh dfisugh disufgh disufgh dfisughs
-sdifugh siudfhgui sfdhgiu sdfhgiu sdguis dfguisdfhgui sdhfgui hdsfuigh usidfhgui shdfg 
-sdiufgh uisdfhgui sdhfgui hdsuifghs idfhgiu sdhfgui sdhfiug hdisufghisu dfhgui sdhfuig
-suidfhg isudfhgiu sdhfgui sdhfugi dhsiughsi iusdfhgiu sdhfgiu hsdif uhsduf h g
+if ($_GET['action'] == "edit") {
+        echo " contenteditable class='bio-edit' placeholder='test'";
+}
+echo "
+>
+        " . $humanQuery['biography'] . "
         </p>
 </div>
 
+";
+
+if ($_GET['action'] == "edit") {
+        echo "<form id='edit-form' method='POST'><input type='hidden' value='true' name='edit'><input type='hidden' name='id' value='" . $_GET['id'] . "'><input type='hidden' id='biography-hidden' name='biography'><input type='submit' value='Save changes'></form><a href='human.php?id=" . $_GET['id'] . "'><button>Cancel</button></a>";
+}
+
+echo"
+
 </div>
-"
+";
 
 ?>
 
@@ -99,6 +150,11 @@ function detailsToggle() {
                 document.getElementById("quickfactstoggle").innerHTML = "Show Quick Facts";
         }
 }
+
+
+document.getElementById("biography").onkeyup =  function() {
+  document.getElementById("biography-hidden").value = this.innerText;
+};
 </script>
 
 </body>
