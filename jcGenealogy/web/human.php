@@ -19,8 +19,25 @@ include "/etc/jcGenealogy/load.php";
 
 
 if ($_POST['edit'] == true) {
-        $mysqli->query("UPDATE humans SET biography = '" . nl2br($_POST['biography'],false) . "' WHERE ID='" . $_POST['id'] . "'");;
-        header("Location: human.php?id=" . $_POST['id']);
+
+        $humanGender = $mysqli->query("SELECT gender FROM humans WHERE id='" . $_POST['id'] . "'")->fetch_assoc();
+        if ($humanGender == 0) {
+                $humanGenderParentValue = "motherid";
+        } else {
+                $humanGenderParentValue = "fatherid";
+        }
+
+        $mysqli->query("UPDATE humans SET $humanGenderParentValue=null WHERE $humanGenderParentValue='" . $_POST['id'] . "'");
+
+$N = count($_POST['addChild']);
+
+for($i=0; $i < $N; $i++) {
+        $mysqli->query("UPDATE humans SET $humanGenderParentValue='" . $_POST['id'] . "' WHERE id='" . $_POST['addChild'][$i] . "'");
+}
+
+$mysqli->query("UPDATE humans SET biography = '" . nl2br($_POST['biography'],false) . "' WHERE ID='" . $_POST['id'] . "'");
+
+header("Location: human.php?id=" . $_POST['id']);
 }
 
 
@@ -59,11 +76,7 @@ echo "
 ";
 
 if ($_GET['action'] == "edit") {
-        echo "
-
-<div id='edit-view'>
-        <img src='assets/view.svg' width='15px'> <a href='human.php?id=" . $humanQuery['id'] . "'>View</a>
-</div>";
+        //echo "<div id='edit-view'><img src='assets/view.svg' width='15px'> <a href='human.php?id=" . $humanQuery['id'] . "'>View</a></div>";
 
 } else {
 
@@ -88,11 +101,20 @@ echo "
                                         <th scope='row'>Gender</th>";
 
                                         if ($_GET['action'] == "edit") {
-                                                echo"
-                                                <td>
-                                                        <input form='edit-form' type='radio' name='gender' value='1'>Male</input>
-                                                        <input form='edit-form' type='radio' name='gender' value='0'>Female</input>
-                                                </td>";
+
+                                                if ($humanQuery['gender'] == 0) {
+                                                        echo"
+                                                        <td>
+                                                                <input form='edit-form' type='radio' name='gender' value='1'>Male</input>
+                                                                <input form='edit-form' type='radio' name='gender' value='0' checked>Female</input>
+                                                        </td>";
+                                                } else {
+                                                        echo"
+                                                        <td>
+                                                                <input form='edit-form' type='radio' name='gender' value='1' checked>Male</input>
+                                                                <input form='edit-form' type='radio' name='gender' value='0'>Female</input>
+                                                        </td>";
+                                                }
                                         } else {
                                                 echo"<td>" . $gender .  "</td>";
                                         }
@@ -110,8 +132,27 @@ echo "
                                 echo"
                                 </tr>
                                 <tr>
-                                        <th scope='row'>Children</th>
-                                        <td><ul>$childList</ul></td>
+                                        <th scope='row'>Children</th>";
+
+                                        if ($_GET['action'] == "edit") {
+                                                echo "<td>";
+                                                $addChildrenQuery = $mysqli->query("SELECT * FROM humans");
+                                                while ($addChildren = $addChildrenQuery->fetch_assoc()) {
+                                                        if ($addChildren['fatherid'] == $_GET['id'] || $addChildren['motherid'] == $_GET['id']) {
+                                                                $checked = " checked";
+                                                        } else {
+                                                                $checked = null;
+                                                        }
+                                                        echo "<div><input id='addchild" . $addChildren['id'] . "' form='edit-form' type='checkbox' value='" . $addChildren['id'] . "' name='addChild[]'$checked>";
+                                                        echo "<label for='addchild" . $addChildren['id'] . "'>" . $addChildren['firstname'] . " " . $addChildren['lastname'] . "</label></div>";
+                                                }
+                                                echo "</td>";
+                                        } else {
+                                                echo "
+
+                                                <td><ul>$childList</ul></td>";
+                                        }
+                                echo"
                                 </tr>
                         </tbody>
                 </table>
